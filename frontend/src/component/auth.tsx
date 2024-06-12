@@ -6,7 +6,7 @@ const AuthPage: FC = () => {
   const [showSignUpPage, setShowSignUpPage] = useState<boolean>(false);
   return (
     <div className="flex flex-col align-center items-center">
-      <div>Sign in</div>
+      <div>{showSignUpPage ? `Sign Up` : `Login`}</div>
       {showSignUpPage ? <SignUp /> : <Login /> }
       <div className="m-2">
         <span>{showSignUpPage ? `Already a user: ` : `First Time User: `}</span>
