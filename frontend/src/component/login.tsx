@@ -1,21 +1,21 @@
 import { FC, useState } from "react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../util/firebase';
 
 const Login: FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.stopPropagation();
     e.preventDefault();
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user, 'useruseruser');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log(userCredential, 'login');
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage)
+    }
   }
 
   return (
