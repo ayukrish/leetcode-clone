@@ -14,6 +14,7 @@ const Login: FC = () => {
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
+      alert(errorCode);
       console.log(errorCode, errorMessage)
     }
   }
